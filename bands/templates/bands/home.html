@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+</head>
+
+<body>
+  <h1>Homepage</h1>
+  <a href="{% url 'bands:register' %}">Register</a>
+
+  <h3>Teams</h3>
+  <ul>
+    {% for team in teams %}
+    <li>
+      {{ team.name }}{% if team.city %} — {{ team.city }}{% endif %}
+    </li>
+    {% empty %}
+    <li>No teams registered yet.</li>
+    {% endfor %}
+  </ul>
+</body>
+
+</html>

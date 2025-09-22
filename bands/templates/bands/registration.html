@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+</head>
+
+<body>
+    <h1>Registration</h1>
+    <form method="post" action="{% url 'bands:register' %}">
+        {% csrf_token %}
+        <h3>Team Details</h3>
+        <label for="tname">Team name</label>
+        <input type="text" id="tname" name="team_name" placeholder="Enter team name ..." required />
+
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" placeholder="Enter city name ..." />
+
+        <label for="plink">Performance Link</label>
+        <input type="url" id="plink" name="performance_link" placeholder="Enter link ..." />
+
+        <hr />
+
+        <h3>Number of Members</h3>
+        <label for="drummer">Drummer</label>
+        <input type="number" min="0" step="1" value="0" id="drummer" name="drummers_input" />
+
+        <label for="guitarist">Guitarist</label>
+        <input type="number" min="0" step="1" value="0" id="guitarist" name="guitarists_input" />
+
+        <hr />
+
+        <h3>Leader Details</h3>
+        <label for="leader_name">Full Name</label>
+        <input type="text" placeholder="full name" id="leader_name" name="leader_name" required />
+
+        <label for="leader_gender">Gender</label>
+        <select name="leader_gender" id="leader_gender">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="O">Other</option>
+        </select>
+
+        <label for="leader_phone">Phone</label>
+        <input type="text" id="leader_phone" name="leader_phone" required />
+
+        <label for="leader_email">Email</label>
+        <input type="email" id="leader_email" name="leader_email" required />
+
+        <hr />
+
+        <h3>Members</h3>
+        <ul id="members"></ul>
+
+        <button type="button" id="addBtn">Add member</button>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const addBtn = document.getElementById("addBtn");
+            const members = document.getElementById("members");
+
+            addBtn.addEventListener("click", function () {
+                const li = document.createElement("li");
+                li.classList.add("member-item");
+
+                li.innerHTML = `
+                <h4>Member</h4>
+                <label>Full Name</label>
+                <input type="text" name="member_name[]" placeholder="Full name" class="member-name" required />
+
+                <label>Gender</label>
+                <select name="member_gender[]">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
+                </select>
+
+                <label>Role</label>
+                <select name="member_role[]">
+                    <option value="Drummer">Drummer</option>
+                    <option value="Guitarist">Guitarist</option>
+                    <option value="Bassist">Bassist</option>
+                    <option value="Vocalist">Vocalist</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label>Phone</label>
+                <input type="text" name="member_phone[]" />
+
+                <label>Email</label>
+                <input type="email" name="member_email[]" />
+
+                <button type="button" class="removeBtn">Remove</button>
+            `;
+
+                li.querySelector(".removeBtn").addEventListener("click", function () {
+                    li.remove();
+                });
+
+                members.appendChild(li);
+            });
+        });
+    </script>
+</body>
+
+</html>
