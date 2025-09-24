@@ -2,45 +2,57 @@ from django.shortcuts import render, redirect
 from django.db import transaction
 from django.urls import reverse
 from django.contrib import messages
+from django.utils import timezone
+from django.db.models import Count
+
 from .models import Team, Member, ROLE_CHOICES
 
-def registration_view(request):
+
+def registration(request):
+    """
+    Handles team registration form. Expects dynamic member inputs with names:
+      - member_name[]
+      - member_gender[]
+      - member_phone[]
+      - member_email[]
+      - member_role[]
+    """
     if request.method == "POST":
-        # Extract team-level fields (names match suggested template below)
+        # --- Team fields ---
         team_name = request.POST.get('team_name', '').strip()
-        city = request.POST.get('city', '').strip()
+        team_city = request.POST.get('city', '').strip()
         performance_link = request.POST.get('performance_link', '').strip()
 
+        # --- Leader fields (kept only on Team) ---
         leader_name = request.POST.get('leader_name', '').strip()
         leader_gender = request.POST.get('leader_gender', 'O')
         leader_phone = request.POST.get('leader_phone', '').strip()
         leader_email = request.POST.get('leader_email', '').strip()
 
-        # Basic server-side validation (expand as needed)
+        # minimal server-side validation
         if not team_name or not leader_name or not leader_phone or not leader_email:
             messages.error(request, "Please fill team name and leader contact fields.")
             return render(request, 'bands/registration.html')
 
-        # Member arrays (client uses name="member_name[]" etc.)
-        member_names = request.POST.getlist('member_name[]')
-        member_genders = request.POST.getlist('member_gender[]')
-        member_phones = request.POST.getlist('member_phone[]')     # recommend adding these in template
-        member_emails = request.POST.getlist('member_email[]')
-        member_roles = request.POST.getlist('member_role[]')      # recommend adding role select in template
+        # --- Member arrays (from dynamic form) ---
+        member_name_list = request.POST.getlist('member_name[]')
+        member_gender_list = request.POST.getlist('member_gender[]')
+        member_phone_list = request.POST.getlist('member_phone[]')
+        member_email_list = request.POST.getlist('member_email[]')
+        member_role_list = request.POST.getlist('member_role[]')
 
-        # Ensure arrays line up
-        n_members = len(member_names)
-        # if n_members == 0: optionally enforce at least 1 member
         try:
             with transaction.atomic():
-                # optional duplicate check by leader_email + year
-                if Team.objects.filter(leader_email=leader_email, year=Team._meta.get_field('year').default).exists():
+                # duplicate-check for current year
+                current_year = timezone.now().year
+                if Team.objects.filter(leader_email=leader_email, year=current_year).exists():
                     messages.error(request, "A registration with this leader email already exists for this year.")
                     return render(request, 'bands/registration.html')
 
+                # create Team row
                 team = Team.objects.create(
                     name=team_name,
-                    city=city,
+                    city=team_city,
                     performance_link=performance_link or None,
                     leader_name=leader_name,
                     leader_gender=leader_gender,
@@ -48,53 +60,65 @@ def registration_view(request):
                     leader_email=leader_email,
                 )
 
-                # create members
-                created_members = []
-                for i in range(n_members):
-                    nm = member_names[i].strip()
-                    if not nm:
+                # prepare Member instances (do not mark anyone as leader)
+                valid_role_keys = {r for r, _ in ROLE_CHOICES}
+                member_instances = []
+                for idx, mname in enumerate(member_name_list):
+                    name = mname.strip()
+                    if not name:
                         continue
-                    gen = member_genders[i] if i < len(member_genders) else 'O'
-                    ph = member_phones[i] if i < len(member_phones) else ''
-                    em = member_emails[i] if i < len(member_emails) else ''
-                    rl = member_roles[i] if i < len(member_roles) else 'Other'
-                    # Normalize role to known choice
-                    if rl not in dict(ROLE_CHOICES):
-                        rl = 'Other'
+                    gender = member_gender_list[idx] if idx < len(member_gender_list) else 'O'
+                    phone = member_phone_list[idx] if idx < len(member_phone_list) else ''
+                    email = member_email_list[idx] if idx < len(member_email_list) else ''
+                    role = member_role_list[idx] if idx < len(member_role_list) else 'Other'
+                    # normalize role
+                    if role not in valid_role_keys:
+                        role = 'Other'
+                    # normalize gender
+                    gender_choices = dict(Member._meta.get_field('gender').choices)
+                    if gender not in gender_choices:
+                        gender = 'O'
 
-                    is_leader = (nm == leader_name) or (em and em == leader_email)
-
-                    m = Member.objects.create(
+                    member_instances.append(Member(
                         team=team,
-                        name=nm,
-                        gender=gen if gen in dict(Member._meta.get_field('gender').choices) else 'O',
-                        phone=ph,
-                        email=em or None,
-                        role=rl,
-                        is_leader=is_leader
-                    )
-                    created_members.append(m)
+                        name=name,
+                        gender=gender,
+                        phone=phone,
+                        email=email or None,
+                        role=role,
+                        is_leader=False,   # explicit: don't mark any member as leader
+                    ))
 
-                # Recompute role counts from members and save
-                counts = {'Drummer':0,'Guitarist':0,'Bassist':0,'Vocalist':0}
-                for m in team.members.all():
-                    if m.role in counts:
-                        counts[m.role] += 1
-                team.drummers = counts['Drummer']
-                team.guitarists = counts['Guitarist']
-                team.bassists = counts['Bassist']
-                team.vocalists = counts['Vocalist']
-                team.save()
+                # bulk insert members (efficient)
+                if member_instances:
+                    Member.objects.bulk_create(member_instances)
+
+                # compute role counts from DB (query guarantees correct saved counts)
+                role_counts_qs = Member.objects.filter(team=team).values('role').annotate(count=Count('id'))
+                counts_map = {'Drummer': 0, 'Guitarist': 0, 'Bassist': 0, 'Vocalist': 0}
+                for rc in role_counts_qs:
+                    role_key = rc['role']
+                    if role_key in counts_map:
+                        counts_map[role_key] = rc['count']
+
+                # save denormalized counts on team
+                team.drummers = counts_map['Drummer']
+                team.guitarists = counts_map['Guitarist']
+                team.bassists = counts_map['Bassist']
+                team.vocalists = counts_map['Vocalist']
+                team.save(update_fields=['drummers', 'guitarists', 'bassists', 'vocalists'])
 
                 messages.success(request, "Registration successful!")
                 return redirect(reverse('bands:home'))
-        except Exception as e:
-            # log error in real app
-            messages.error(request, f"Error processing registration: {e}")
+
+        except Exception as exc:
+            # In production log the exception; for now show message and let user retry
+            messages.error(request, f"Error processing registration: {exc}")
             return render(request, 'bands/registration.html')
 
-    # GET
+    # GET: render form
     return render(request, 'bands/registration.html')
+
 
 def home(request):
     teams = Team.objects.order_by('-created_at')[:20]
