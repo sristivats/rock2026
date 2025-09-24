@@ -3,57 +3,37 @@ __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-*.pyc
+*.so
+
+# Virtual Environment
+.venv/
+venv/
+env/
 
 # Django
-*.sqlite3
 db.sqlite3
 media/
 staticfiles/
-*.log
 
-# VS Code
+# IDE & OS
 .vscode/
-
-# Virtual environments
-.env
-.venv/
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# OS files
+.idea/
 .DS_Store
 Thumbs.db
 
-# Migrations
-*/migrations/*.pyc
-*/migrations/*.pyo
-*/migrations/*.bak
-*/migrations/__pycache__/
-*/migrations/*.log
+# Logs
+*.log
 
-# IDE files
-.idea/
-*.swp
-
-# Node (if using npm/yarn for frontend)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Test coverage
-htmlcov/
+# Pytest / Coverage
 .coverage
-.tox/
-nosetests.xml
-coverage.xml
+htmlcov/
 *.cover
 *.py,cover
+.cache
+nosetests.xml
+coverage.xml
 
-# Others
-*.bak
-*.tmp
+# Build
+*.egg-info/
+dist/
+build/
