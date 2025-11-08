@@ -1,0 +1,11 @@
+Hi {{ leader_name }},
+
+Thank you — your band "{{ team_name }}" has been registered for {{ year }}.
+
+Leader: {{ leader_name }} ({{ leader_email }})
+City: {{ team_city }}
+
+We'll contact you with further details.
+
+Cheers,
+Rockophonix Team

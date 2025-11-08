@@ -2,25 +2,166 @@
 <html lang="en">
 
 <head>
+  {% load static %}
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home</title>
+  <link rel="stylesheet" href="{% static 'bands/css/homeStyle.css' %}">
+  <link rel="stylesheet" href="{% static 'bands/css/homeMediaQuery.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="{% static 'bands/js/homeHamburger.js' %}" defer></script>
+  <script src="{% static 'bands/js/homeAnimate.js' %}" defer></script>
+  <script src="{% static 'bands/js/homeGalleryAnimate.js' %}" defer></script>
+  <script src="{% static 'bands/js/homeFooterAnimate.js' %}" defer></script>
+  <script src="{% static 'bands/js/homeVinylAnimate.js' %}" defer></script>
 </head>
 
 <body>
-  <h1>Homepage</h1>
-  <a href="{% url 'bands:register' %}">Register</a>
+  <audio id="vinylAudio" preload="auto" loop>
+    <source src="{% static 'bands/music/track.mp3' %}" type="audio/mpeg">
+    <!-- provide fallback types as needed -->
+    Your browser does not support the audio element.
+  </audio>
 
-  <h3>Teams</h3>
-  <ul>
-    {% for team in teams %}
-    <li>
-      {{ team.name }}{% if team.city %} — {{ team.city }}{% endif %}
-    </li>
-    {% empty %}
-    <li>No teams registered yet.</li>
-    {% endfor %}
-  </ul>
+    <!-- Hamburger Menu (place this first, right after body tag) -->
+  <div class="hamburger-menu">
+    <div class="menu-header">
+      <button class="close-btn">&times;</button>
+    </div>
+    <nav class="menu-nav">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <!-- Overlay (to dim background when menu is open) -->
+  <div class="menu-overlay"></div>
+
+
+  <div class="heading">
+    <div class="wrapper">
+      <div class="navbar">
+        <div class="left">
+          <img src="{% static 'bands/images/hamburger-menu.png'%}" alt="" class="hamburger">
+          <img src="{% static 'bands/images/navImg.png'%}" alt="" class="img1">
+          <div class="nav-items">
+            <span>HOME</span>
+            <img src="{% static 'bands/images/circle.png'%}" alt="" class="img2">
+            <span>ABOUT US</span>
+            <img src="{% static 'bands/images/circle.png'%}" alt="" class="img2">
+            <span>TIMELINE</span>
+            <img src="{% static 'bands/images/circle.png'%}" alt="" class="img2">
+            <span>CONTACT US</span>
+          </div>
+        </div>
+        <div class="right">
+          <a href="/register" style="all: unset;"><button>REGISTER</button></a>
+        </div>
+      </div>
+
+      <div class="main1">
+        <h1>ROCK O PHONIX</h1>
+
+        <div class="vinyl">
+          <img src="{% static 'bands/images/vinylBoard.png' %}" alt="" class="vinyl-board">
+          <img src="{% static 'bands/images/vinyl.png' %}" alt="" class="vinyl-player">
+          <img src="{% static 'bands/images/vinylDisk.png' %}" alt="" class="vinyl-disk">
+          <div class="vinyl-tonearm" id="tonearm">
+            <img src="{% static 'bands/images/vinylTonearm.png' %}" alt="tonearm" draggable="false">
+            <div class="tonearm-tip" id="tip" aria-hidden="true"></div>
+          </div>
+          <div class="play-area"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about">
+    <div class="wrapper">
+      <div class="about-container">
+        <h2>ABOUT</h2>
+        <p>Alcheringa is the annual cultural festival of the Indian Institute of Technology, Guwahati. A splendid idea
+          realized by a group of students in 1996 at IITG marked dawn of one of Asia's most exhilarating and significant
+          cultural college fests as we know it today. </p>
+
+        <div class="about-image">
+          <img src="{% static 'bands/images/vinylBoard.png' %}" alt="" class="about-vinyl-board">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery">
+    <h1>GALLERY</h1>
+    <img src="{% static 'bands/images/gallery/img1.png' %}" alt="" id="img1">
+    <img src="{% static 'bands/images/gallery/img2.png' %}" alt="" id="img2">
+    <img src="{% static 'bands/images/gallery/img3.png' %}" alt="" id="img3">
+    <img src="{% static 'bands/images/gallery/img4.png' %}" alt="" id="img4">
+    <img src="{% static 'bands/images/gallery/img1.png' %}" alt="" id="img5">
+    <img src="{% static 'bands/images/gallery/img5.png' %}" alt="" id="img6">
+    <img src="{% static 'bands/images/gallery/img6.png' %}" alt="" id="img7">
+    <img src="{% static 'bands/images/gallery/img7.png' %}" alt="" id="img8">
+    <img src="{% static 'bands/images/gallery/img8.png' %}" alt="" id="img9">
+  </div>
+
+  <div class="contact">
+    <h2 id="help1">Need any help? Reach out to us.</h2>
+    <h2 id="help2">Need any help?</h2>
+
+    <img src="{% static 'bands/images/contactCoupon.png' %}" alt="" class="contact-img1">
+    <img src="{% static 'bands/images/contactBackground.png' %}" alt="" class="contact-img2">
+
+    <div class="footer">
+      <footer class="slanted-footer">
+        <div class="footer-content">
+          <div class="footwrap">
+            <h3>ALCHERINGA</h3>
+            <div class="divider"></div>
+            <div class="connect">
+              <p>Connect</p>
+              <div class="icons">
+                <img src="{% static 'bands/images/footer-icons/insta-icon.png' %}" alt="">
+                <img src="{% static 'bands/images/footer-icons/youtube-icon.png' %}" alt="">
+                <img src="{% static 'bands/images/footer-icons/facebook-icon.png' %}" alt="">
+                <img src="{% static 'bands/images/footer-icons/twitter-icon.png' %}" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="contact-footer">
+            <div class="temp-connect">
+              <h4>Connect</h4>
+                            <div class="temp-icons">
+                <img src="{% static 'bands/images/footer-icons/insta-icon.png' %}" alt="">
+                <img src="{% static 'bands/images/footer-icons/youtube-icon.png' %}" alt="">
+                <img src="{% static 'bands/images/footer-icons/facebook-icon.png' %}" alt="">
+                <img src="{% static 'bands/images/footer-icons/twitter-icon.png' %}" alt="">
+              </div>
+            </div>
+            <div class="contact-text">
+              <div class="container">
+                <img src="{% static 'bands/images/footer-icons/globe.png' %}" alt="">
+                <span>alcheringa.in</span>
+              </div>
+
+              <div class="container">
+                <img src="{% static 'bands/images/footer-icons/mail.png' %}" alt="">
+                <span>alcheringa@gmail.com</span>
+              </div>
+
+              <div class="container">
+                <img src="{% static 'bands/images/footer-icons/phone.png' %}" alt="">
+                <span>19-00-00-0000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
 </body>
 
 </html>

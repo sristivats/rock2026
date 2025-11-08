@@ -1,0 +1,265 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
+@font-face {
+  font-family: "Brunson";
+  src: url("../fonts/brunson/Brunson.ttf") format("truetype");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  width: 100%;
+  font-size: 16px;
+}
+
+/* Basic Reset & Body Styles (for demo purposes) */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.gallery-section {
+  position: relative;
+  width: 100vw; /* Takes full viewport width */
+  max-width: 1600px; /* Max width to prevent images from getting too huge */
+  padding-top: 10vw; /* Responsive top padding */
+  padding-bottom: 10vw; /* Responsive bottom padding */
+  display: flex; /* Using flexbox to center the heading */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Important to clip content if images go outside */
+}
+
+.gallery-heading {
+  position: relative; /* So z-index works against images */
+  font-size: clamp(3rem, 8vw, 10rem); /* Responsive font size */
+  color: white;
+  text-align: center;
+  z-index: 10; /* Ensure heading is above images */
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* A subtle shadow for contrast */
+}
+
+.gallery-images {
+  position: absolute; /* This container overlays the heading for positioning */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-item {
+  position: absolute;
+  border: 2px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Some depth */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+  z-index: 5; /* Below the heading */
+  overflow: hidden; /* To ensure images fit within their bounds */
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Crops images to fill their container */
+  display: block; /* Removes extra space below image */
+  filter: grayscale(80%); /* Makes them black and white like the design */
+  transition: filter 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05); /* Slight enlarge on hover */
+  z-index: 11; /* Bring to front on hover */
+}
+
+.gallery-item:hover img {
+  filter: grayscale(0%); /* Full color on hover */
+}
+
+/* ------------------------------------- */
+/* INDIVIDUAL IMAGE POSITIONS AND SIZES */
+/* Using percentages and calc for responsiveness */
+/* These values are highly customizable based on your design */
+/* I'm estimating based on your Figma, adjust as needed */
+/* ------------------------------------- */
+
+.gallery-item.item-1 {
+  /* Top Left Cluster - Main left image */
+  width: 20vw; /* 20% of viewport width */
+  height: 30vw; /* Taller */
+  top: 10%;
+  left: 5%;
+  transform: rotate(-8deg);
+}
+
+.gallery-item.item-2 {
+  /* Top Left Cluster - Smaller image below item-1 */
+  width: 15vw;
+  height: 10vw;
+  top: 35%;
+  left: 10%;
+  transform: rotate(5deg);
+}
+
+.gallery-item.item-3 {
+  /* Top Left Cluster - Above the heading, slightly left */
+  width: 25vw;
+  height: 18vw;
+  top: 12%;
+  left: calc(50% - 30vw); /* Centered and offset left */
+  transform: rotate(3deg);
+}
+
+.gallery-item.item-4 {
+  /* Middle-left, below heading */
+  width: 18vw;
+  height: 25vw;
+  top: 55%;
+  left: 8%;
+  transform: rotate(-10deg);
+}
+
+.gallery-item.item-5 {
+  /* Top Right Cluster - Main right image */
+  width: 20vw;
+  height: 30vw;
+  top: 5%;
+  right: 5%; /* Using right for consistent positioning */
+  left: unset; /* Unset left if right is used */
+  transform: rotate(7deg);
+}
+
+.gallery-item.item-6 {
+  /* Top Right Cluster - Above the heading, slightly right */
+  width: 20vw;
+  height: 15vw;
+  top: 10%;
+  right: calc(50% - 25vw);
+  left: unset;
+  transform: rotate(-5deg);
+}
+
+.gallery-item.item-7 {
+  /* Middle-right, below heading */
+  width: 22vw;
+  height: 28vw;
+  top: 40%;
+  right: 8%;
+  left: unset;
+  transform: rotate(12deg);
+}
+
+.gallery-item.item-8 {
+  /* Bottom Left (under item-4) */
+  width: 18vw;
+  height: 20vw;
+  top: 70%;
+  left: 25%;
+  transform: rotate(4deg);
+}
+
+.gallery-item.item-9 {
+  /* Bottom Middle (guitarist) */
+  width: 20vw;
+  height: 28vw;
+  top: 65%;
+  left: calc(50% - 10vw);
+  transform: rotate(-7deg);
+}
+
+.gallery-item.item-10 {
+  /* Bottom Right (single guitarist) */
+  width: 18vw;
+  height: 25vw;
+  top: 70%;
+  right: 15%;
+  left: unset;
+  transform: rotate(9deg);
+}
+
+/* ------------------------------------- */
+/* MEDIA QUERIES FOR RESPONSIVENESS */
+/* Adjust positions and sizes for smaller screens */
+/* ------------------------------------- */
+
+@media (max-width: 1200px) {
+  .gallery-heading {
+    font-size: clamp(2.5rem, 7vw, 8rem);
+  }
+
+  /* You'll need to re-evaluate and adjust positions/sizes here */
+  /* Example: making images slightly smaller or shifting them */
+
+  .gallery-item.item-1 {
+    width: 18vw;
+    height: 27vw;
+    top: 12%;
+    left: 3%;
+    transform: rotate(-6deg);
+  }
+  .gallery-item.item-2 {
+    width: 13vw;
+    height: 9vw;
+    top: 37%;
+    left: 8%;
+    transform: rotate(3deg);
+  }
+  .gallery-item.item-3 {
+    width: 22vw;
+    height: 16vw;
+    top: 15%;
+    left: calc(50% - 28vw);
+    transform: rotate(2deg);
+  }
+  /* Continue adjusting all .gallery-item classes here */
+  /* You might even consider stacking them differently or hiding some for very small screens */
+}
+
+@media (max-width: 768px) {
+  .gallery-section {
+    flex-direction: column; /* Stack heading and images for very small screens */
+    padding-top: 5vw;
+    padding-bottom: 5vw;
+  }
+
+  .gallery-heading {
+    margin-bottom: 30px; /* Space out from images */
+    font-size: clamp(2rem, 6vw, 5rem);
+  }
+
+  .gallery-images {
+    position: static; /* No longer absolutely positioned */
+    display: flex; /* Use flexbox for simple stacking */
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: center;
+    gap: 15px; /* Space between images */
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .gallery-item {
+    position: static; /* No longer absolutely positioned */
+    width: 45%; /* Two images per row */
+    height: 30vw; /* Adjust height for mobile */
+    transform: none !important; /* Remove individual rotations */
+    border: none; /* Simpler look on mobile */
+    box-shadow: none;
+  }
+
+  .gallery-item img {
+    filter: grayscale(0%); /* Full color on mobile to simplify */
+  }
+
+  .gallery-item:hover {
+    transform: none; /* Disable hover scale on mobile */
+  }
+}

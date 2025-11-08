@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.db.models import Count
 
 from .models import Team, Member, ROLE_CHOICES
+from .utils import send_registration_email
 
 
 def registration(request):
@@ -109,6 +110,15 @@ def registration(request):
                 team.save(update_fields=['drummers', 'guitarists', 'bassists', 'vocalists'])
 
                 messages.success(request, "Registration successful!")
+
+                # send confirmation email to leader (non-blocking)
+                try:
+                    send_registration_email(team, async_send=True)
+                except Exception:
+                    # already logged in utils — don't reveal internals to user
+                    logger = __import__('logging').getLogger(__name__)
+                    logger.exception("send_registration_email raised unexpectedly")
+
                 return redirect(reverse('bands:home'))
 
         except Exception as exc:
