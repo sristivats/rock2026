@@ -2,13 +2,18 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', () => {
+  const isMobile = window.innerWidth < 430;
+
+// Then use ternary operators:
+
   
   // Create the scroll animation
   const vinylTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: '.heading',
-      start: 'top top',
-      end: 'bottom top',
+      // start: 'bottom 75%',
+      start: isMobile ? 'top top' : 'bottom 75%',
+      end: 'bottom 20%',
       scrub: 1.2, // Smooth scrubbing effect (higher = smoother but slower)
       pin: false,
       anticipatePin: 1,
@@ -54,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     rotation: -35,
     opacity: 0,
     ease: 'power2.inOut',
-  }, '<-0.05');
+  }, '<0.05');
 
   // Optional: Fade out the heading text as well
   vinylTimeline.to('.main1 h1', {
@@ -83,9 +88,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Optional: Add resize handler for responsive behavior
 let resizeTimer;
+let previousWidth = window.innerWidth;
+
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
-    ScrollTrigger.refresh();
+    const currentWidth = window.innerWidth;
+    const crossedBreakpoint = 
+      (previousWidth < 430 && currentWidth >= 430) || 
+      (previousWidth >= 430 && currentWidth < 430);
+    
+    if (crossedBreakpoint) {
+      location.reload(); // Reload when crossing 430px breakpoint
+    } else {
+      ScrollTrigger.refresh();
+    }
+    previousWidth = currentWidth;
   }, 250);
 });
