@@ -14,6 +14,7 @@ html,
 body {
   width: 100%;
   font-size: 16px;
+  scroll-behavior: smooth;
 }
 
 .wrapper {
@@ -63,6 +64,21 @@ body {
   color: #f2e9dc;
   font-weight: 500;
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+}
+
+.nav-items .nav-link {
+  text-decoration: none;
+  color: inherit;
+  /* font-weight: 600; */
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 0 8px;
+  display: inline-block;
+}
+
+.nav-items .nav-link:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .hamburger {
@@ -208,7 +224,7 @@ body {
   all: unset;
   font-family: "Brunson", sans-serif;
   font-size: 5rem;
-  letter-spacing: 0.35rem;
+  letter-spacing: 0.1rem;
   text-align: center;
   color: #f2e9dc;
 }
@@ -226,6 +242,66 @@ body {
 
 .about-image img {
   width: 100%;
+}
+
+.timeline {
+  width: 100%;
+  background: #0e0e0e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5rem;
+}
+
+.timeline h2 {
+  font-family: "Brunson", sans-serif;
+  width: 100%;
+  color: #f2e9dc;
+  font-size: 5rem;
+  font-weight: 100;
+}
+
+.timeline-container {
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  position: relative;
+width: 100%;
+  aspect-ratio: 16/12;
+  margin-top: 2rem;
+}
+
+.timeline .time-1 {
+  position: absolute;
+  width: 62%;
+}
+
+.timeline .time-2 {
+  position: absolute;
+  left: 55%;
+  width: 16.1%;
+}
+
+.timeline .time-3 {
+  position: absolute;
+  left: 65%;
+  width: 12.65%;
+  top: 1.4%;
+}
+
+.timeline .time-4 {
+  position: absolute;
+  width: 13%;
+  left: 73%;
+  top: 1.2%;
+}
+
+.timeline .time-5 {
+  position: absolute;
+  width: 13%;
+  left: 82%;
+  top: 1.2%;
 }
 
 /* container */
@@ -451,6 +527,10 @@ body {
 
 .temp-connect {
   display: none;
+}
+
+.icons a:hover {
+  transform: scale(1.1);
 }
 
 /* Hamburger icon */
