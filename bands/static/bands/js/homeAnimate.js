@@ -138,7 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       onRelease() {
         gsap.to(this.target, { scale: 1, duration: 0.12 });
-        const finalClamped = gsap.utils.clamp(MIN_ANGLE, MAX_ANGLE, this.rotation);
+        const finalClamped = gsap.utils.clamp(
+          MIN_ANGLE,
+          MAX_ANGLE,
+          this.rotation
+        );
         gsap.set(this.target, { rotation: finalClamped });
         this.update();
         if (isOverlapping(tip, playArea)) startSpinAndAudio();

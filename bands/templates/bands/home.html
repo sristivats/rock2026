@@ -65,14 +65,14 @@
         <h1>ROCK O PHONIX</h1>
 
         <div class="vinyl">
-          <img src="{% static 'bands/images/vinylBoard.png' %}" alt="" class="vinyl-board">
-          <img src="{% static 'bands/images/vinyl.png' %}" alt="" class="vinyl-player">
-          <img src="{% static 'bands/images/vinylDisk.png' %}" alt="" class="vinyl-disk">
+          <img src="{% static 'bands/images/vinylBoard.png' %}" alt="vinyl board" class="vinyl-board">
+          <img src="{% static 'bands/images/vinyl.png' %}" alt="vinyl player" class="vinyl-player">
+          <img src="{% static 'bands/images/vinylDisk.png' %}" alt="vinyl disk" class="vinyl-disk">
           <div class="vinyl-tonearm" id="tonearm">
             <img src="{% static 'bands/images/vinylTonearm.png' %}" alt="tonearm" draggable="false">
             <div class="tonearm-tip" id="tip" aria-hidden="true"></div>
           </div>
-          <div class="play-area"></div>
+          <div class="play-area" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -98,11 +98,12 @@
       <h2>TIMELINE</h2>
 
       <div class="timeline-container">
-      <img src="{% static 'bands/images/timeline/timeline-main-5.png' %}" alt="" class="time-5">
-      <img src="{% static 'bands/images/timeline/timeline-main-4.png' %}" alt="" class="time-4">
-      <img src="{% static 'bands/images/timeline/timeline-main-3.png' %}" alt="" class="time-3">
-      <img src="{% static 'bands/images/timeline/timeline-main-2.png' %}" alt="" class="time-2">
-      <img src="{% static 'bands/images/timeline/timeline-main-1.png' %}" alt="" class="time-1"></div>
+        <img src="{% static 'bands/images/timeline/timeline-main-5.png' %}" alt="" class="time-5">
+        <img src="{% static 'bands/images/timeline/timeline-main-4.png' %}" alt="" class="time-4">
+        <img src="{% static 'bands/images/timeline/timeline-main-3.png' %}" alt="" class="time-3">
+        <img src="{% static 'bands/images/timeline/timeline-main-2.png' %}" alt="" class="time-2">
+        <img src="{% static 'bands/images/timeline/timeline-main-1.png' %}" alt="" class="time-1">
+      </div>
     </div>
   </div>
 
@@ -123,7 +124,52 @@
     <h2 id="help1">Need any help? Reach out to us.</h2>
     <h2 id="help2">Need any help?</h2>
 
-    <img src="{% static 'bands/images/contactCoupon.png' %}" alt="" class="contact-img1">
+    <div class="contact-div">
+      <div class="contact-div-contain">
+        <div class="coupon-text">
+          <div class="coupon-heading">
+            <span class="name">AKSHARA GUPTA</span>
+            <span class="role">Event Head</span>
+          </div>
+
+          <div class="coupon-contact">
+            <div class="contact-container">
+              <img src="{% static 'bands/images/footer-icons/phone.png' %}" alt="">
+              <div class="coupon-phone">9999999999</div>
+            </div>
+            <div class="contact-container">
+              <img src="{% static 'bands/images/footer-icons/mail.png' %}" alt="">
+              <div class="coupon-mail">mail@yahoo.com</div>
+            </div>
+          </div>
+        </div>
+
+        <img src="{% static 'bands/images/placeholder.jpg' %}" alt="" class="coupon-img">
+      </div>
+    </div>
+
+    <!-- <div class="contact-div">
+
+      <div class="coupon-heading">
+        <span class="name">AKSHARA GUPTA</span>
+        <span class="role">Event Head</span>
+      </div>
+
+      <div class="coupon-contact">
+        <div class="contact-container">
+          <img src="{% static 'bands/images/footer-icons/phone.png' %}" alt="">
+          <div class="coupon-phone">9999999999</div>
+        </div>
+        <div class="contact-container">
+          <img src="{% static 'bands/images/footer-icons/mail.png' %}" alt="">
+          <div class="coupon-mail">mail@yahoo.com</div>
+        </div>
+      </div>
+
+      <img src="{% static 'bands/images/placeholder.jpg' %}" alt="" class="coupon-img">
+
+    </div> -->
+
     <img src="{% static 'bands/images/contactBackground.png' %}" alt="" class="contact-img2">
 
     <div class="footer">
