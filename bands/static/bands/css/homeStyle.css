@@ -23,7 +23,7 @@ body {
 
 .heading {
   width: 100%;
-  height: max(100vh, 950px);
+  /* height: max(100vh, 950px); */
   background: linear-gradient(180deg, #050505 0%, #111111 100%);
   display: flex;
   flex-direction: column;
@@ -160,7 +160,6 @@ body {
   height: auto;
   top: 20%;
   left: 9.5%;
-  transform: rotate(-20deg);
   transform-origin: 13.2% 82%;
   cursor: grab;
   pointer-events: auto;
@@ -203,6 +202,14 @@ body {
   top: 16%;
 }
 
+.vinyl-player,
+.vinyl-disk,
+.vinyl-tonearm {
+  will-change: transform;
+  transform: translateZ(0) rotate(-20deg); /* hint for GPU compositing */
+  backface-visibility: hidden;
+}
+
 .about {
   width: 100%;
   height: 100vh;
@@ -233,6 +240,7 @@ body {
   font-family: "Manrope", sans-serif;
   color: #a3a3a3;
   width: 70%;
+  padding-top: 2rem;
 }
 
 .about-image {
@@ -267,7 +275,7 @@ body {
   align-items: center;
   justify-content: center; */
   position: relative;
-width: 100%;
+  width: 100%;
   aspect-ratio: 16/12;
   margin-top: 2rem;
 }
@@ -410,8 +418,8 @@ width: 100%;
 }
 
 .contact-footer {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .contact h2 {
@@ -426,14 +434,14 @@ width: 100%;
   display: none;
 }
 
-.contact-img1 {
+/* .contact-img1 {
   position: absolute;
   width: 55%;
   left: 50%;
   transform: translateX(-50%);
   padding-top: 8rem;
   z-index: 20;
-}
+} */
 
 .contact-img2 {
   position: absolute;
@@ -443,6 +451,113 @@ width: 100%;
   padding-top: 8rem;
   z-index: 10;
 }
+
+.contact-div {
+  position: absolute;
+  width: 54%;
+  aspect-ratio: 2.72274;
+  top: 24.5rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.66deg);
+  background-color: #1b1524;
+  z-index: 20;
+  -webkit-mask-image: radial-gradient(circle at 71% 0, transparent 5%, black 5%),
+    radial-gradient(circle at 71% 100%, transparent 6%, black 6%);
+  mask-image: radial-gradient(circle at 71% 0, transparent 6%, black 6%),
+    radial-gradient(circle at 71% 100%, transparent 6%, black 6%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.contact-div-contain {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-div-contain .coupon-img {
+  position: absolute;
+  height: 100%;
+  width: auto;
+  right: 0;
+  top: 0;
+  border-left: 2px dashed white;
+}
+
+.coupon-text {
+  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 1.5rem;
+  padding-left: 2rem;
+  padding-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.coupon-heading {
+  display: flex;
+  flex-direction: column;
+}
+
+.coupon-contact,
+.coupon-heading .role {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(0.75rem, 1.75vw, 2rem);
+}
+
+.coupon-heading .name {
+  font-family: "Brunson", sans-serif;
+  font-size: clamp(1rem, 4.5vw, 3rem);
+}
+
+.coupon-heading .role {
+  color: #585858;
+  font-size: clamp(0.75rem, 1.75vw, 2rem);
+}
+
+.coupon-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.coupon-contact .contact-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.contact-container img {
+  height: 1.75rem;
+  width: 1.75rem;
+}
+
+/* .contact-div .coupon-img {
+  position: absolute;
+  height: 100%;
+  width: auto;
+  right: 0;
+  top: 0;
+  border-left: 2px dashed white;
+}
+
+.contact-div .coupon-heading {
+  position: absolute;
+  top: 11%;
+  left: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.coupon-heading .name {
+  font-family: "Brunson", sans-serif;
+  font-size: clamp(1rem, 2.5vw, 2rem);
+} */
 
 .footer {
   width: 100%;
