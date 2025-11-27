@@ -5,7 +5,7 @@
   {% load static %}
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home</title>
+  <title>RockoPhonix</title>
   <link rel="stylesheet" href="{% static 'bands/css/homeStyle.css' %}">
   <link rel="stylesheet" href="{% static 'bands/css/homeMediaQuery.css' %}">
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
@@ -86,8 +86,14 @@
           realized by a group of students in 1996 at IITG marked dawn of one of Asia's most exhilarating and significant
           cultural college fests as we know it today. </p>
 
-        <div class="about-image">
-          <img src="{% static 'bands/images/vinylBoard.png' %}" alt="" class="about-vinyl-board">
+        <div class="vinyl">
+          <img src="{% static 'bands/images/vinylBoard.png' %}" alt="vinyl board" class="vinyl-board">
+          <img src="{% static 'bands/images/vinyl.png' %}" alt="vinyl player" class="vinyl-player">
+          <img src="{% static 'bands/images/vinylDisk.png' %}" alt="vinyl disk" class="vinyl-disk">
+          <div class="vinyl-tonearm" id="tonearm">
+            <img src="{% static 'bands/images/vinylTonearm.png' %}" alt="tonearm" draggable="false">
+            <div class="tonearm-tip" id="tip" aria-hidden="true"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -128,23 +134,23 @@
       <div class="contact-div-contain">
         <div class="coupon-text">
           <div class="coupon-heading">
-            <span class="name">AKSHARA GUPTA</span>
+            <span class="name">HARSHA</span>
             <span class="role">Event Head</span>
           </div>
 
           <div class="coupon-contact">
             <div class="contact-container">
               <img src="{% static 'bands/images/footer-icons/phone.png' %}" alt="">
-              <div class="coupon-phone">9999999999</div>
+              <div class="coupon-phone">+91 81061 91690</div>
             </div>
             <div class="contact-container">
               <img src="{% static 'bands/images/footer-icons/mail.png' %}" alt="">
-              <div class="coupon-mail">mail@yahoo.com</div>
+              <div class="coupon-mail">rockophonix@alcheringa.co.in</div>
             </div>
           </div>
         </div>
 
-        <img src="{% static 'bands/images/placeholder.jpg' %}" alt="" class="coupon-img">
+        <img src="{% static 'bands/images/person-2.jpg' %}" alt="" class="coupon-img">
       </div>
     </div>
 

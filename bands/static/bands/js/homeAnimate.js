@@ -41,16 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const player = document.querySelector(".vinyl-player");
     const audio = document.getElementById("vinylAudio");
 
-    // === Spin tween ===
+    // === Spin tween - always running ===
     const spin = gsap.to(player, {
       rotation: "+=360",
       duration: 4,
       ease: "none",
       repeat: -1,
-      paused: true,
+      paused: false, // Start spinning immediately
       transformOrigin: "50% 50%",
     });
-    spin.timeScale(0);
+    spin.timeScale(1); // Always spinning at full speed
 
     // === Helper ===
     function isOverlapping(a, b) {
@@ -68,8 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!audio) return;
       try {
         await audio.play();
-      } catch (err) {}
+      } catch (err) {
+        console.log("Audio play failed:", err);
+      }
     }
+
     function safePauseAudio() {
       if (!audio) return;
       try {
@@ -77,45 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (err) {}
     }
 
-    let spinStartTween = null;
-    function startSpinAndAudio() {
-      if (spin.paused()) spin.play();
-      if (spinStartTween) spinStartTween.kill();
-      spinStartTween = gsap.to(spin, {
-        timeScale: 1,
-        duration: 0.35,
-        ease: "power1.out",
-        onStart: safePlayAudio,
-      });
-    }
-
-    let spinStopTween = null;
-    function stopSpinAndAudio() {
-      if (spinStopTween) spinStopTween.kill();
-      spinStopTween = gsap.to(spin, {
-        timeScale: 0,
-        duration: 0.45,
-        ease: "power1.out",
-        onComplete: () => {
-          spin.pause();
-          safePauseAudio();
-        },
-      });
-    }
-
-    let checking = false;
-    function startCheckingLoop() {
-      if (checking) return;
-      checking = true;
-      (function loop() {
-        if (!checking) return;
-        if (isOverlapping(tip, playArea)) startSpinAndAudio();
-        else stopSpinAndAudio();
-        requestAnimationFrame(loop);
-      })();
-    }
-    function stopCheckingLoop() {
-      checking = false;
+    // Check initial state and play audio if tonearm is already on play area
+    function checkInitialState() {
+      if (isOverlapping(tip, playArea)) {
+        safePlayAudio();
+      }
     }
 
     const draggable = Draggable.create(tonearm, {
@@ -123,7 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
       inertia: false,
       onPress() {
         gsap.to(this.target, { scale: 1.02, duration: 0.12 });
-        startCheckingLoop();
+        // Stop audio immediately when picking up the tonearm
+        safePauseAudio();
       },
       onDrag() {
         let r = this.rotation;
@@ -133,8 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
           this.update();
           r = clamped;
         }
-        if (isOverlapping(tip, playArea)) startSpinAndAudio();
-        else stopSpinAndAudio();
+        // Don't play audio while dragging
       },
       onRelease() {
         gsap.to(this.target, { scale: 1, duration: 0.12 });
@@ -145,21 +114,30 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         gsap.set(this.target, { rotation: finalClamped });
         this.update();
-        if (isOverlapping(tip, playArea)) startSpinAndAudio();
-        else stopSpinAndAudio();
-        stopCheckingLoop();
+
+        // Only play audio if dropped on the play-area
+        if (isOverlapping(tip, playArea)) {
+          safePlayAudio();
+        } else {
+          safePauseAudio();
+        }
       },
     })[0];
 
     window.addEventListener("resize", () => {
-      if (isOverlapping(tip, playArea)) startSpinAndAudio();
-      else stopSpinAndAudio();
+      if (isOverlapping(tip, playArea)) {
+        safePlayAudio();
+      } else {
+        safePauseAudio();
+      }
     });
 
-    spin.pause();
-    spin.timeScale(0);
+    // Set up audio
     if (audio) {
       audio.loop = true;
     }
+
+    // Check initial state after a brief delay to ensure layout is ready
+    setTimeout(checkInitialState, 100);
   }
 });
