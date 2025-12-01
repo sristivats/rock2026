@@ -338,6 +338,82 @@ body {
   top: 1.2%;
 }
 
+.timeline-mobile {
+  width: 100%;
+  background: #0e0e0e;
+  display: block;
+  padding: 1.5rem;
+  padding-top: 4rem;
+  box-sizing: border-box;
+}
+
+.timeline-mobile h2 {
+  font-family: "Brunson", sans-serif;
+  width: 100%;
+  color: #f2e9dc;
+  font-size: clamp(3rem, 7.5vw, 4rem);
+  font-weight: 100;
+  text-align: center;
+  margin: 0;
+}
+
+.timeline-mobile-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+}
+
+/* All images responsive */
+.timeline-mobile-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.timeline-mobile .time-2 {
+  margin-top: clamp(-8rem, -15vw, -6.5rem);
+}
+.timeline-mobile .time-3 {
+  margin-top: clamp(-8rem, -15vw, -6.5rem);
+}
+.timeline-mobile .time-4 {
+  margin-top: clamp(-8rem, -15vw, -6.5rem);
+}
+.timeline-mobile .time-5 {
+  margin-top: clamp(-8rem, -15vw, -6.5rem);
+}
+
+/* .timeline-mobile .time-1 {
+  position: absolute;
+  width: 100%;
+} */
+
+/* .timeline-mobile .time-2 {
+  position: absolute;
+  top: 95%;
+  width: 100%;
+} */
+
+/* .timeline-mobile .time-3 {
+  position: absolute;
+  width: 100%;
+  top: 190%;
+} */
+
+/* .timeline-mobile .time-4 {
+  position: absolute;
+  width: 100%;
+  top: 285%;
+} */
+
+/* .timeline-mobile .time-5 {
+  position: absolute;
+  width: 100%;
+  top: 385%;
+} */
+
 /* container */
 .gallery {
   width: 100%;

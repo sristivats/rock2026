@@ -49,11 +49,40 @@
   }
 
   .about {
-    height: 48vh;
+    /* height: 48vh; */
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
   .about p {
     padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .about .vinyl {
+    display: none;
+  }
+
+  /* .about .vinyl {
+    width: 80%;
+  }
+
+  .about .vinyl-board {
+    width: 100%;
+  }
+
+  .about .vinyl-tonearm {
+    width: 42%;
+    top: 18%;
+    left: 10%;
+  } */
+
+  .timeline {
+    display: none;
+  }
+
+  .timeline-mobile {
+    display: block;
   }
 
   .contact {
@@ -141,7 +170,7 @@
   }
 
   .about {
-    height: 90vh;
+    /* height: 90vh; */
   }
 
   .about-container h2 {
