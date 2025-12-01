@@ -341,7 +341,7 @@ body {
 .timeline-mobile {
   width: 100%;
   background: #0e0e0e;
-  display: block;
+  display: none;
   padding: 1.5rem;
   padding-top: 4rem;
   box-sizing: border-box;

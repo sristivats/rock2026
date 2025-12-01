@@ -8,7 +8,11 @@
   }
 
   .navbar {
-    font-size: 1.25rem;
+    font-size: 1rem;
+  }
+
+  .nav-items .nav-link {
+    padding: 0;
   }
 
   .vinyl {
@@ -76,14 +80,6 @@
     top: 18%;
     left: 10%;
   } */
-
-  .timeline {
-    display: none;
-  }
-
-  .timeline-mobile {
-    display: block;
-  }
 
   .contact {
     height: 70vh;
@@ -181,6 +177,14 @@
   .about-image {
     width: 100%;
     padding-top: 0;
+  }
+
+  .timeline-mobile {
+    display: block;
+  }
+
+  .timeline {
+    display: none;
   }
 
   .gallery {
