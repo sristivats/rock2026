@@ -8,7 +8,11 @@
   }
 
   .navbar {
-    font-size: 1.25rem;
+    font-size: 1rem;
+  }
+
+  .nav-items .nav-link {
+    padding: 0;
   }
 
   .vinyl {
@@ -49,12 +53,33 @@
   }
 
   .about {
-    height: 48vh;
+    /* height: 48vh; */
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
   .about p {
     padding-top: 2rem;
+    padding-bottom: 2rem;
   }
+
+  .about .vinyl {
+    display: none;
+  }
+
+  /* .about .vinyl {
+    width: 80%;
+  }
+
+  .about .vinyl-board {
+    width: 100%;
+  }
+
+  .about .vinyl-tonearm {
+    width: 42%;
+    top: 18%;
+    left: 10%;
+  } */
 
   .contact {
     height: 70vh;
@@ -141,7 +166,7 @@
   }
 
   .about {
-    height: 90vh;
+    /* height: 90vh; */
   }
 
   .about-container h2 {
@@ -152,6 +177,14 @@
   .about-image {
     width: 100%;
     padding-top: 0;
+  }
+
+  .timeline-mobile {
+    display: block;
+  }
+
+  .timeline {
+    display: none;
   }
 
   .gallery {
