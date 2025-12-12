@@ -3,9 +3,9 @@
     width: 90%;
   }
 
-  .heading {
-    /* height: 80vw; */
-  }
+  /* .heading {
+    height: 80vw;
+  } */
 
   .navbar {
     font-size: 1rem;
@@ -63,10 +63,6 @@
     padding-bottom: 2rem;
   }
 
-  .about .vinyl {
-    display: none;
-  }
-
   /* .about .vinyl {
     width: 80%;
   }
@@ -81,6 +77,23 @@
     left: 10%;
   } */
 
+  .about .vinyl-board {
+    width: 97%;
+  }
+
+  .about .vinyl-player {
+    width: 65.5%;
+    top: 6%;
+    left: 20%;
+  }
+
+  .vinyl-tonearm {
+    width: 34%;
+    top: 18.5%;
+    left: 17%;
+    transform: rotate(-25deg);
+  }
+
   .contact {
     height: 70vh;
   }
@@ -94,10 +107,25 @@
   }
 }
 
-@media (max-width: 431px) {
-  .heading {
-    /* height: 64vh; */
+@media (max-width: 540px) {
+  .left .img1 {
+    margin-right: 0.5rem;
   }
+
+  .left .img2 {
+    margin-left: 0.4rem;
+    margin-right: 0.4rem;
+  }
+
+  .navbar {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 431px) {
+  /* .heading {
+    height: 64vh;
+  } */
 
   .main1 h1 {
     font-size: 16vw;
@@ -165,8 +193,12 @@
     height: 10px;
   }
 
-  .about {
-    /* height: 90vh; */
+  /* .about {
+    height: 90vh;
+  } */
+
+  .about .vinyl {
+    display: none;
   }
 
   .about-container h2 {

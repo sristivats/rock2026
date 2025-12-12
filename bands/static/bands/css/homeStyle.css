@@ -24,7 +24,7 @@ body {
 .heading {
   width: 100%;
   /* height: max(100vh, 950px); */
-  background: linear-gradient(180deg, #050505 0%, #111111 100%);
+  background: linear-gradient(180deg, #050505 0%, #0e0e0e 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -217,6 +217,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 2rem;
 }
 
 .about-container {
