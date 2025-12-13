@@ -20,7 +20,7 @@ body {
 
 main {
   width: 100%;
-  min-height: 100vh;
+  min-height: 120vh;
   background: #0e0e0e;
   color: #f2e9dc;
   position: relative;
@@ -40,7 +40,7 @@ main {
   display: inline;
   font-weight: 100;
   width: 100%;
-  color: #696660;
+  color: #8f8a82;
   font-family: "Brunson", sans-serif;
   letter-spacing: 0.25rem;
   font-size: 30rem;
@@ -103,8 +103,8 @@ a {
 }
 
 .content {
-  width: 100%;             /* remove in next state */
-  height: 100%;            /* remove in next state */
+  width: 100%; /* remove in next state */
+  height: 100%; /* remove in next state */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -308,7 +308,9 @@ form {
   gap: 2rem;
 }
 
-.section-3 button, .section-4 button, .section-5 button {
+.section-3 button,
+.section-4 button,
+.section-5 button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -381,7 +383,7 @@ form {
 }
 
 .add-member {
-    width: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
