@@ -82,6 +82,7 @@
             <div class="tonearm-tip" id="tip" aria-hidden="true"></div>
           </div>
           <div class="play-area" aria-hidden="true"></div>
+          <div class="indicator">Play Me!!</div>
         </div>
       </div>
     </div>
@@ -96,11 +97,11 @@
           cultural college fests as we know it today. </p>
 
         <div class="vinyl">
-          <img src="{% static 'bands/images/vinylBoard.png' %}" alt="vinyl board" class="vinyl-board">
-          <img src="{% static 'bands/images/vinyl.png' %}" alt="vinyl player" class="vinyl-player">
-          <img src="{% static 'bands/images/vinylDisk.png' %}" alt="vinyl disk" class="vinyl-disk">
+          <img src="{% static 'bands/images/vinylBoard.webp' %}" alt="vinyl board" class="vinyl-board">
+          <img src="{% static 'bands/images/vinyl.webp' %}" alt="vinyl player" class="vinyl-player">
+          <img src="{% static 'bands/images/vinylDisk.webp' %}" alt="vinyl disk" class="vinyl-disk">
           <div class="vinyl-tonearm" id="tonearm">
-            <img src="{% static 'bands/images/vinylTonearm.png' %}" alt="tonearm" draggable="false">
+            <img src="{% static 'bands/images/vinylTonearm.webp' %}" alt="tonearm" draggable="false">
             <div class="tonearm-tip" id="tip" aria-hidden="true"></div>
           </div>
         </div>
@@ -136,15 +137,33 @@
 
   <div class="gallery">
     <h1>GALLERY</h1>
-    <img src="{% static 'bands/images/gallery/img1.png' %}" alt="" id="img1">
-    <img src="{% static 'bands/images/gallery/img2.png' %}" alt="" id="img2">
-    <img src="{% static 'bands/images/gallery/img3.png' %}" alt="" id="img3">
-    <img src="{% static 'bands/images/gallery/img4.png' %}" alt="" id="img4">
-    <img src="{% static 'bands/images/gallery/img1.png' %}" alt="" id="img5">
-    <img src="{% static 'bands/images/gallery/img5.png' %}" alt="" id="img6">
-    <img src="{% static 'bands/images/gallery/img6.png' %}" alt="" id="img7">
-    <img src="{% static 'bands/images/gallery/img7.png' %}" alt="" id="img8">
-    <img src="{% static 'bands/images/gallery/img8.png' %}" alt="" id="img9">
+    <div class="image1">
+      <img src="{% static 'bands/images/gallery/img1.webp' %}" alt="" id="img1">
+    </div>
+    <div class="image2">
+      <img src="{% static 'bands/images/gallery/img2.webp' %}" alt="" id="img2">
+    </div>
+    <div class="image3">
+      <img src="{% static 'bands/images/gallery/img3.webp' %}" alt="" id="img3">
+    </div>
+    <div class="image4">
+      <img src="{% static 'bands/images/gallery/img4.webp' %}" alt="" id="img4">
+    </div>
+    <div class="image5">
+      <img src="{% static 'bands/images/gallery/img5.webp' %}" alt="" id="img5">
+    </div>
+    <div class="image6">
+      <img src="{% static 'bands/images/gallery/img6.webp' %}" alt="" id="img6">
+    </div>
+    <div class="image7">
+      <img src="{% static 'bands/images/gallery/img7.webp' %}" alt="" id="img7">
+    </div>
+    <div class="image8">
+      <img src="{% static 'bands/images/gallery/img8.webp' %}" alt="" id="img8">
+    </div>
+    <div class="image9">
+      <img src="{% static 'bands/images/gallery/img9.webp' %}" alt="" id="img9">
+    </div>
   </div>
 
   <div class="contact" id="contact">
@@ -174,28 +193,6 @@
         <img src="{% static 'bands/images/person-2.jpg' %}" alt="" class="coupon-img">
       </div>
     </div>
-
-    <!-- <div class="contact-div">
-
-      <div class="coupon-heading">
-        <span class="name">AKSHARA GUPTA</span>
-        <span class="role">Event Head</span>
-      </div>
-
-      <div class="coupon-contact">
-        <div class="contact-container">
-          <img src="{% static 'bands/images/footer-icons/phone.png' %}" alt="">
-          <div class="coupon-phone">9999999999</div>
-        </div>
-        <div class="contact-container">
-          <img src="{% static 'bands/images/footer-icons/mail.png' %}" alt="">
-          <div class="coupon-mail">mail@yahoo.com</div>
-        </div>
-      </div>
-
-      <img src="{% static 'bands/images/placeholder.jpg' %}" alt="" class="coupon-img">
-
-    </div> -->
 
     <img src="{% static 'bands/images/contactBackground.png' %}" alt="" class="contact-img2">
 
@@ -233,7 +230,7 @@
                 <a href="" target="_blank">
                   <img src="{% static 'bands/images/footer-icons/youtube-icon.png' %}" alt="">
                 </a>
-                <a href="" target="_blank">
+                <a href="https://www.facebook.com/rockophonix/" target="_blank">
                   <img src="{% static 'bands/images/footer-icons/facebook-icon.png' %}" alt="">
                 </a>
                 <a href="https://x.com/home" target="_blank">
@@ -262,6 +259,55 @@
       </footer>
     </div>
   </div>
+
+  <script defer>
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const indicator = document.querySelector(".indicator");
+
+      // 1. THE IDLE FLOAT
+      // This runs immediately and loops forever.
+      // It gives the element a gentle "breathing" motion.
+      const floatAnim = gsap.to(indicator, {
+        y: -8,              // Move up 8px
+        duration: 1.5,      // Take 1.5 seconds
+        repeat: -1,         // Infinite loop
+        yoyo: true,         // Go back down
+        ease: "sine.inOut"  // The smoothest ease for natural floating
+      });
+
+      // 2. THE HOVER INTERACTION
+      indicator.addEventListener("mouseenter", () => {
+        // Pause the float so it doesn't conflict with our hover transform
+        floatAnim.pause();
+
+        gsap.to(indicator, {
+          scale: 1.1,     // Grow slightly
+          rotation: 3,    // A playful tilt
+          y: -12,         // Lift it slightly higher than the float
+          boxShadow: "0px 15px 30px rgba(0,0,0,0.2)", // Add deep shadow
+          duration: 0.4,
+          ease: "back.out(1.7)", // "Back" ease creates an elastic pop
+          overwrite: "auto"
+        });
+      });
+
+      indicator.addEventListener("mouseleave", () => {
+        // Return to base state
+        gsap.to(indicator, {
+          scale: 1,
+          rotation: 0,
+          y: 0,           // Return to origin (we will restart float after)
+          boxShadow: "0px 0px 0px rgba(0,0,0,0)",
+          duration: 0.4,
+          ease: "power2.out",
+          onComplete: () => {
+            // Resume the gentle floating once the mouse leaves
+            floatAnim.resume();
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
