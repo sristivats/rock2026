@@ -26,7 +26,7 @@
         <div class="main-nav">
             <a class="backhome" href="/">
                 <img src="{% static 'bands/images/left-arrow-red.png' %}" alt="">
-            <span>Home</span>
+                <span>Home</span>
             </a>
 
             <img src="{% static 'bands/images/navImg.png' %}" alt="">
@@ -154,9 +154,9 @@
                                     <div class="sec4sub2">
                                         <select name="leader_gender" id="gender">
                                             <option value="">Select Gender</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                            <option value="none">Rather Not Say</option>
+                                            <option value="M">Male</option>
+                                            <option value="F">Female</option>
+                                            <option value="O">Rather Not Say</option>
                                         </select>
                                         <input type="email" name="leader_email" placeholder="Email">
                                     </div>
@@ -225,15 +225,15 @@
     </main>
 
     <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const addMember = document.querySelector("#addMember")
-                const section4 = document.querySelector(".section-4")
-    
-                addMember.addEventListener("click", function () {
-                    const div = document.createElement("div")
-                    div.classList.add("member-wrapper")
-    
-                    div.innerHTML = `
+        document.addEventListener("DOMContentLoaded", function () {
+            const addMember = document.querySelector("#addMember")
+            const section4 = document.querySelector(".section-4")
+
+            addMember.addEventListener("click", function () {
+                const div = document.createElement("div")
+                div.classList.add("member-wrapper")
+
+                div.innerHTML = `
                     <h3>Memeber Details</h3>
 
                     <div class="sec4Fields">
@@ -253,9 +253,9 @@
                             <div class="sec4sub2">
                                 <select name="member_gender[]" id="gender">
                                     <option value="">Select Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="none">Rather Not Say</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                    <option value="O">Rather Not Say</option>
                                 </select>
                                 <input type="email" name="member_email[]" placeholder="Email">
                                 <button class="btn-back" type="button" id="removeBtn">
@@ -267,14 +267,14 @@
                         </div>
                     </div>
                     `
-    
-                    div.querySelector("#removeBtn").addEventListener("click", function () {
-                        div.remove();
-                    })
-    
-                    section4.appendChild(div)
+
+                div.querySelector("#removeBtn").addEventListener("click", function () {
+                    div.remove();
                 })
+
+                section4.appendChild(div)
             })
+        })
     </script>
 </body>
 

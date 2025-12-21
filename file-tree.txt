@@ -1,0 +1,137 @@
+rock2026/
+- .gitignore
+- Dockerfile
+- manage.py
+- requirements.txt
+- runserver.sh
+- db.sqlite3
+
+bands/
+- __init__.py
+- admin.py
+- apps.py
+- models.py
+- tests.py
+- urls.py
+- utils.py
+- views.py
+
+  migrations/
+  - __init__.py
+  - 0001_initial.py
+  - 0002_alter_member_phone_alter_team_leader_phone.py
+
+  templates/
+  bands/
+  - home.html
+  - registration.html
+
+    emails/
+    - registration_welcome.html
+    - registration_welcome.txt
+
+  static/
+  bands/
+    css/
+    - homeStyle.css
+    - homeMediaQuery.css
+    - registerStyle.css
+    - registerMediaQuery.css
+    - trialStyles.css
+
+    js/
+    - homeAnimate.js
+    - homeFooterAnimate.js
+    - homeGalleryAnimate.js
+    - homeHamburger.js
+    - homeVinylAnimate.js
+    - registerCounter.js
+    - registerMain.js
+    - trialAnimate.js
+
+    fonts/
+    brunson/
+    - Brunson.ttf
+    - Brunson Rough.ttf
+
+    music/
+    - track.mp3
+
+    images/
+    - person.jpg
+    - person-2.jpg
+    - placeholder.jpg
+    - navImg.png
+    - left-arrow.png
+    - left-arrow-red.png
+    - right-arrow.png
+    - hamburger-menu.png
+    - vinylDisk.png
+    - vinylDisk.webp
+    - vinylTonearm.png
+    - vinylTonearm.webp
+    - vinylBoard.png
+    - vinylBoard.webp
+    - vinylBoardX.png
+    - vinyl.webp
+    - contactBackground.png
+    - contactCoupon.png
+    - close-circle.png
+    - circle.png
+    - check.png
+
+      gallery/
+      - img1.webp
+      - img2.webp
+      - img3.webp
+      - img4.webp
+      - img5.webp
+      - img6.webp
+      - img7.webp
+      - img8.webp
+      - img9.webp
+
+      footer-icons/
+      - facebook-icon.png
+      - insta-icon.png
+      - twitter-icon.png
+      - youtube-icon.png
+      - mail.png
+      - phone.png
+      - globe.png
+
+      timeline/
+      - timeline-main-1.png
+      - timeline-main-2.png
+      - timeline-main-3.png
+      - timeline-main-4.png
+      - timeline-main-5.png
+
+      timeline-mobile/
+      - timeline-main-1.png
+      - timeline-main-2.png
+      - timeline-main-3.png
+      - timeline-main-4.png
+      - timeline-main-5.png
+
+      svg/
+      - add-lg.svg
+      - close-circle.svg
+
+rockophonix/
+- __init__.py
+- asgi.py
+- settings.py
+- urls.py
+- views.py
+- wsgi.py
+
+static/
+- bands/
+  css/
+  fonts/
+  images/
+  js/
+
+
+(End of tree)
