@@ -41,6 +41,10 @@ ALLOWED_HOSTS = [
     "127.0.0.1"
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://rocko.alcheringa.co.in",
+    "http://rocko.alcheringa.co.in"
+]
 
 # Application definition
 
