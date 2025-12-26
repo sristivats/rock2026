@@ -25,6 +25,9 @@
 
     gtag('config', 'G-Z4G50V1XJM');
   </script>
+
+  <link rel="preload" as="image" href="{% static 'bands/images/vinylBoard.webp' %}">
+  <link rel="preload" as="image" href="{% static 'bands/images/vinyl.webp' %}">
 </head>
 
 <body>
@@ -74,8 +77,10 @@
         <h1>ROCK O PHONIX</h1>
 
         <div class="vinyl">
-          <img src="{% static 'bands/images/vinylBoard.webp' %}" alt="vinyl board" class="vinyl-board">
-          <img src="{% static 'bands/images/vinyl.webp' %}" alt="vinyl player" class="vinyl-player">
+          <img src="{% static 'bands/images/vinylBoard.webp' %}" alt="vinyl board" class="vinyl-board"
+            fetchpriority="high" loading="eager">
+          <img src="{% static 'bands/images/vinyl.webp' %}" alt="vinyl player" class="vinyl-player" fetchpriority="high"
+            loading="eager">
           <img src="{% static 'bands/images/vinylDisk.webp' %}" alt="vinyl disk" class="vinyl-disk">
           <div class="vinyl-tonearm" id="tonearm">
             <img src="{% static 'bands/images/vinylTonearm.webp' %}" alt="tonearm" draggable="false">
@@ -97,8 +102,10 @@
           cultural college fests as we know it today. </p>
 
         <div class="vinyl">
-          <img src="{% static 'bands/images/vinylBoard.webp' %}" alt="vinyl board" class="vinyl-board">
-          <img src="{% static 'bands/images/vinyl.webp' %}" alt="vinyl player" class="vinyl-player">
+          <img src="{% static 'bands/images/vinylBoard.webp' %}" alt="vinyl board" class="vinyl-board"
+            fetchpriority="high" loading="eager">
+          <img src="{% static 'bands/images/vinyl.webp' %}" alt="vinyl player" class="vinyl-player" fetchpriority="high"
+            loading="eager">
           <img src="{% static 'bands/images/vinylDisk.webp' %}" alt="vinyl disk" class="vinyl-disk">
           <div class="vinyl-tonearm" id="tonearm">
             <img src="{% static 'bands/images/vinylTonearm.webp' %}" alt="tonearm" draggable="false">
@@ -138,31 +145,31 @@
   <div class="gallery">
     <h1>GALLERY</h1>
     <div class="image1">
-      <img src="{% static 'bands/images/gallery/img1.webp' %}" alt="" id="img1">
+      <img src="{% static 'bands/images/gallery/img1.webp' %}" alt="" id="img1" loading="lazy">
     </div>
     <div class="image2">
-      <img src="{% static 'bands/images/gallery/img2.webp' %}" alt="" id="img2">
+      <img src="{% static 'bands/images/gallery/img2.webp' %}" alt="" id="img2" loading="lazy">
     </div>
     <div class="image3">
-      <img src="{% static 'bands/images/gallery/img3.webp' %}" alt="" id="img3">
+      <img src="{% static 'bands/images/gallery/img3.webp' %}" alt="" id="img3" loading="lazy">
     </div>
     <div class="image4">
-      <img src="{% static 'bands/images/gallery/img4.webp' %}" alt="" id="img4">
+      <img src="{% static 'bands/images/gallery/img4.webp' %}" alt="" id="img4" loading="lazy">
     </div>
     <div class="image5">
-      <img src="{% static 'bands/images/gallery/img5.webp' %}" alt="" id="img5">
+      <img src="{% static 'bands/images/gallery/img5.webp' %}" alt="" id="img5" loading="lazy">
     </div>
     <div class="image6">
-      <img src="{% static 'bands/images/gallery/img6.webp' %}" alt="" id="img6">
+      <img src="{% static 'bands/images/gallery/img6.webp' %}" alt="" id="img6" loading="lazy">
     </div>
     <div class="image7">
-      <img src="{% static 'bands/images/gallery/img7.webp' %}" alt="" id="img7">
+      <img src="{% static 'bands/images/gallery/img7.webp' %}" alt="" id="img7" loading="lazy">
     </div>
     <div class="image8">
-      <img src="{% static 'bands/images/gallery/img8.webp' %}" alt="" id="img8">
+      <img src="{% static 'bands/images/gallery/img8.webp' %}" alt="" id="img8" loading="lazy">
     </div>
     <div class="image9">
-      <img src="{% static 'bands/images/gallery/img9.webp' %}" alt="" id="img9">
+      <img src="{% static 'bands/images/gallery/img9.webp' %}" alt="" id="img9" loading="lazy">
     </div>
   </div>
 

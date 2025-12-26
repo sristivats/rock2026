@@ -3,6 +3,7 @@
 @font-face {
   font-family: "Brunson";
   src: url("../fonts/brunson/Brunson.ttf") format("truetype");
+  font-display: swap;
 }
 
 * {
