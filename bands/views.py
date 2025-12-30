@@ -7,6 +7,8 @@ from django.db.models import Count
 from django.db.models import Q
 from functools import wraps
 from . import dashboard_config
+import csv
+from django.http import HttpResponse
 
 from .models import Team, Member, ROLE_CHOICES
 from .utils import send_registration_email
@@ -241,3 +243,62 @@ def team_detail(request, team_id):
         'members': members
     }
     return render(request, 'bands/dashboard/team_detail.html', context)
+
+@dashboard_login_required
+def export_csv(request):
+    """
+    Generates a CSV file containing all teams, leaders, and members.
+    """
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="rockophonix_participants.csv"'
+
+    writer = csv.writer(response)
+    
+    # CSV Header
+    writer.writerow([
+        'Team ID', 'Team Name', 'City', 'Performance Link', 'Registration Date',
+        'Participant Type', 'Name', 'Role', 'Gender', 'Phone', 'Email', 
+        'Is Leader'
+    ])
+
+    teams = Team.objects.all().prefetch_related('members').order_by('-created_at')
+
+    for team in teams:
+        # 1. Write the Team Leader row
+        # Note: Leaders are stored on the Team model, separate from Member table in your current architecture.
+        writer.writerow([
+            team.id,
+            team.name,
+            team.city,
+            team.performance_link,
+            team.created_at.strftime('%Y-%m-%d %H:%M'),
+            'Leader',              # Participant Type
+            team.leader_name,
+            'Team Leader',         # Role
+            team.get_leader_gender_display(),
+            team.leader_phone,
+            team.leader_email,
+            'Yes'                  # Is Leader
+        ])
+
+        # 2. Write rows for each Team Member
+        for member in team.members.all():
+            # Check if this member is actually the leader (by email) to avoid duplicates if users entered themselves twice
+            is_duplicate_leader = (member.email and member.email == team.leader_email)
+            
+            writer.writerow([
+                team.id,
+                team.name,
+                team.city,
+                team.performance_link,
+                team.created_at.strftime('%Y-%m-%d %H:%M'),
+                'Member',          # Participant Type
+                member.name,
+                member.role,
+                member.get_gender_display(),
+                member.phone,
+                member.email,
+                'Yes' if is_duplicate_leader else 'No'
+            ])
+
+    return response

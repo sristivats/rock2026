@@ -48,13 +48,39 @@
             margin-top: 0;
         }
 
+        /* NEW: Flex container for search bar and button */
+        .search-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
         .search-bar {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
+            /* Remove bottom margin as container handles it */
+            margin-bottom: 0;
+        }
+
+        /* NEW: Red Search Button Style */
+        .search-btn {
+            background-color: #e63946;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
+            /* Prevent text wrapping */
+        }
+
+        .search-btn:hover {
+            background-color: #c92a37;
+            /* Slightly darker on hover */
         }
 
         .list-item {
@@ -104,6 +130,9 @@
     <header>
         <h1>Competition Dashboard</h1>
         <div>
+            <a href="{% url 'bands:export_csv' %}" class="logout-btn"
+                style="background-color: #28a745; margin-right: 10px;">Export CSV</a>
+
             <span>Total Teams: {{ total_teams }}</span> |
             <a href="{% url 'bands:dashboard_logout' %}" class="logout-btn">Logout</a>
         </div>
@@ -114,9 +143,12 @@
             <h2>Teams</h2>
             <form method="GET">
                 <input type="hidden" name="q_member" value="{{ q_member }}">
-                <input type="text" name="q_team" class="search-bar" placeholder="Search teams, cities, leaders..."
-                    value="{{ q_team }}">
-                <button type="submit" style="display:none;">Search</button>
+
+                <div class="search-container">
+                    <input type="text" name="q_team" class="search-bar" placeholder="Search teams, cities, leaders..."
+                        value="{{ q_team }}">
+                    <button type="submit" class="search-btn">Search</button>
+                </div>
             </form>
 
             {% for team in teams %}
@@ -139,9 +171,12 @@
             <h2>Members</h2>
             <form method="GET">
                 <input type="hidden" name="q_team" value="{{ q_team }}">
-                <input type="text" name="q_member" class="search-bar" placeholder="Search members or roles..."
-                    value="{{ q_member }}">
-                <button type="submit" style="display:none;">Search</button>
+
+                <div class="search-container">
+                    <input type="text" name="q_member" class="search-bar" placeholder="Search members or roles..."
+                        value="{{ q_member }}">
+                    <button type="submit" class="search-btn">Search</button>
+                </div>
             </form>
 
             {% for member in members %}

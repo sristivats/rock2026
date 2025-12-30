@@ -13,4 +13,5 @@ urlpatterns = [
     path('dashboard/logout/', views.dashboard_logout, name='dashboard_logout'),
     path('dashboard/', views.dashboard_home, name='dashboard_home'),
     path('dashboard/team/<int:team_id>/', views.team_detail, name='team_detail'),
+    path('dashboard/export/', views.export_csv, name='export_csv'),
 ]
