@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logout-btn {
+            background: #333;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .section {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            height: 85vh;
+            overflow-y: auto;
+        }
+
+        h2 {
+            border-bottom: 2px solid #e63946;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .list-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.2s;
+        }
+
+        .list-item:hover {
+            background: #f9f9f9;
+        }
+
+        .list-item a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        .badge {
+            background: #e63946;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+
+        .leader-badge {
+            background: #FFD700;
+            color: #333;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-left: 5px;
+        }
+
+        .meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Competition Dashboard</h1>
+        <div>
+            <span>Total Teams: {{ total_teams }}</span> |
+            <a href="{% url 'bands:dashboard_logout' %}" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>Teams</h2>
+            <form method="GET">
+                <input type="hidden" name="q_member" value="{{ q_member }}">
+                <input type="text" name="q_team" class="search-bar" placeholder="Search teams, cities, leaders..."
+                    value="{{ q_team }}">
+                <button type="submit" style="display:none;">Search</button>
+            </form>
+
+            {% for team in teams %}
+            <div class="list-item">
+                <a href="{% url 'bands:team_detail' team.id %}">
+                    <strong style="font-size: 1.1em;">{{ team.name }}</strong>
+                    <span class="meta">({{ team.city }})</span>
+                    <div class="meta">
+                        Leader: {{ team.leader_name }} <br>
+                        Total Members: {{ team.members.count }}
+                    </div>
+                </a>
+            </div>
+            {% empty %}
+            <p>No teams found.</p>
+            {% endfor %}
+        </div>
+
+        <div class="section">
+            <h2>Members</h2>
+            <form method="GET">
+                <input type="hidden" name="q_team" value="{{ q_team }}">
+                <input type="text" name="q_member" class="search-bar" placeholder="Search members or roles..."
+                    value="{{ q_member }}">
+                <button type="submit" style="display:none;">Search</button>
+            </form>
+
+            {% for member in members %}
+            <div class="list-item">
+                <strong>{{ member.name }}</strong>
+                {% if member.is_leader or member.email == member.team.leader_email %}
+                <span class="leader-badge">LEADER</span>
+                {% endif %}
+                <span class="badge">{{ member.role }}</span>
+                <div class="meta">
+                    Team: <a href="{% url 'bands:team_detail' member.team.id %}"
+                        style="display:inline; color: #e63946;">{{ member.team.name }}</a>
+                    <br>
+                    Phone: {{ member.phone }}
+                </div>
+            </div>
+            {% empty %}
+            <p>No members found.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+
+</html>
